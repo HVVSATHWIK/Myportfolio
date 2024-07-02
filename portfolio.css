@@ -209,13 +209,16 @@ footer {
 
 /* Animations */
 @keyframes glow {
-    0% {
-        text-shadow: 0 0 5px #00c6ff, 0 0 10px #00c6ff, 0 0 15px #00c6ff;
+    0%, 100% {
+        text-shadow: 0 0 10px #00c6ff, 0 0 20px #00c6ff, 0 0 30px #00c6ff;
     }
     50% {
         text-shadow: 0 0 20px #00c6ff, 0 0 30px #00c6ff, 0 0 40px #00c6ff;
     }
-    100% {
-        text-shadow: 0 0 5px #00c6ff, 0 0 10px #00c6ff, 0 0 15px #00c6ff;
-    }
+}
+
+@font-face {
+    font-family: 'Orbitron';
+    src: url('https://fonts.gstatic.com/s/orbitron/v31/yMJRMIlzd....woff2') format('woff2');
+    font-display: swap;
 }
