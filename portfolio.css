@@ -112,12 +112,13 @@ nav ul li a:hover {
 
 .skills-list {
     list-style: none;
-    text-align: center;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .skills-list li {
-    display: inline-block;
     margin: 10px 15px;
     padding: 10px 15px;
     background-color: #00c6ff;
