@@ -6,91 +6,260 @@
     <meta name="description" content="HVVSATHWIK - Undergraduate Student Specializing in Artificial Intelligence">
     <meta name="keywords" content="Artificial Intelligence, Portfolio, Projects, HVVSATHWIK">
     <title>HVVSATHWIK's Portfolio</title>
-    <link rel="preload" href="portfolio.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="portfolio.css"></noscript>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="portfolio.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>HVVSATHWIK</h1>
-        <p>Undergraduate Student Specializing in Artificial Intelligence</p>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#education">Education</a></li>
+    <!-- Three.js Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="glass-nav">
+        <div class="nav-logo">HVVSATHWIK</div>
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
-    <main>
-        <div class="container" id="about">
-            <section class="section">
-                <h2>About Me</h2>
-                <picture>
-                    <source srcset="profile.webp" type="image/webp">
-                    <source srcset="profile.png" type="image/png">
-                    <img src="profile.png" alt="Profile Picture" class="profile-pic" width="150" height="150" loading="lazy">
-                </picture>
-                <p class="about-me">
-                    I am an undergraduate student specializing in Artificial Intelligence, driven by a profound curiosity to understand AI systems' inner workings and capabilities. With a passion for exploring the potential applications of AI technology, I am committed to delving into the complexities of this field. Eager to collaborate with others and contribute to the advancement of artificial intelligence.
-                </p>
-            </section>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">HVVSATHWIK</h1>
+            <p class="hero-subtitle">Undergraduate Student Specializing in Artificial Intelligence</p>
+            <div class="hero-cta">
+                <a href="#projects" class="cta-button">View Projects</a>
+                <a href="#contact" class="cta-button-outline">Get in Touch</a>
+            </div>
         </div>
-        <div class="container" id="education">
-            <section class="section">
-                <h2>Education</h2>
-                <p><strong>B.Tech in Computer Science</strong>, Amrita Vishwa Vidhyapeetham, Amaravati, India (2023 - Present)</p>
-            </section>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
         </div>
-        <div class="container" id="skills">
-            <section class="section">
-                <h2>Skills</h2>
-                <ul class="skills-list">
-                    <li>Java</li>
-                    <li>Python</li>
-                    <li>C</li>
-                    <li>HTML & CSS</li>
-                    <li>JavaScript</li>
-                    <li>Three.js</li>
-                </ul>
-            </section>
-        </div>
-        <div class="container" id="projects">
-            <section class="section">
-                <h2>Projects</h2>
-                <div class="project">
-                    <h3>WeatherGit</h3>
-                    <p>An interactive website that displays real-time weather information on a 3D Earth globe.</p>
-                    <p><strong>Technologies used:</strong> HTML, CSS, JS, Three.js</p>
-                    <a href="https://github.com/HVVSATHWIK/WeatherWebsite" target="_blank" rel="noopener">View Project on GitHub</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section glass-section">
+        <div class="section-content">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="about-image">
                     <picture>
-                        <source srcset="Weather.webp" type="image/webp">
-                        <source srcset="Weather.png" type="image/png">
-                        <img src="Weather.png" alt="WeatherGit Screenshot" loading="lazy">
+                        <source srcset="profile.webp" type="image/webp">
+                        <source srcset="profile.png" type="image/png">
+                        <img src="profile.png" alt="Profile Picture" class="profile-pic" width="200" height="200" loading="lazy">
                     </picture>
                 </div>
-                <!-- Additional projects can be added here -->
-            </section>
-        </div>
-        <div class="container" id="contact">
-            <section class="section">
-                <h2>Contact Information</h2>
-                <div class="contact-info">
-                    <p>📫 How to reach me?</p>
-                    <p>Email: <a href="mailto:hvvsathwik27@gmail.com">hvvsathwik27@gmail.com</a></p>
-                    <p>Phone: <a href="tel:+919381560974">+91-93815 60974</a></p>
-                    <p>GitHub: <a href="https://github.com/HVVSATHWIK" target="_blank" rel="noopener">HVVSATHWIK</a></p>
-                    <p>LinkedIn: <a href="https://www.linkedin.com/in/h-vv-sathwik-8488882b9/" target="_blank" rel="noopener">H VV Sathwik</a></p>
+                <div class="about-text">
+                    <p>I am an undergraduate student specializing in Artificial Intelligence, driven by a profound curiosity to understand AI systems' inner workings and capabilities. With a passion for exploring the potential applications of AI technology, I am committed to delving into the complexities of this field.</p>
+                    <p>Eager to collaborate with others and contribute to the advancement of artificial intelligence.</p>
+                    <div class="education-card">
+                        <h3>Education</h3>
+                        <p><strong>B.Tech in Computer Science</strong></p>
+                        <p>Amrita Vishwa Vidhyapeetham, Amaravati, India</p>
+                        <p class="edu-year">2023 - Present</p>
+                    </div>
                 </div>
-            </section>
+            </div>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2024 HVVSATHWIK</p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section glass-section">
+        <div class="section-content">
+            <h2 class="section-title">Skills & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">☕</div>
+                    <h3>Java</h3>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🐍</div>
+                    <h3>Python</h3>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">©</div>
+                    <h3>C</h3>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🌐</div>
+                    <h3>HTML & CSS</h3>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">⚡</div>
+                    <h3>JavaScript</h3>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3>Three.js</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="section-content">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1: Global CareNest -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Global CareNest</h3>
+                        <span class="project-tag">Healthcare Platform</span>
+                    </div>
+                    <p class="project-desc">A comprehensive healthcare platform connecting patients with medical professionals globally.</p>
+                    <div class="project-tech">
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>MongoDB</span>
+                    </div>
+                    <a href="https://github.com/HVVSATHWIK" target="_blank" rel="noopener" class="project-link">View on GitHub →</a>
+                </div>
+
+                <!-- Project 2: Dots -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Dots</h3>
+                        <span class="project-tag">Interactive Game</span>
+                    </div>
+                    <p class="project-desc">An engaging dot-connecting puzzle game with procedural level generation.</p>
+                    <div class="project-tech">
+                        <span>JavaScript</span>
+                        <span>Canvas API</span>
+                        <span>AI Logic</span>
+                    </div>
+                    <a href="https://github.com/HVVSATHWIK" target="_blank" rel="noopener" class="project-link">View on GitHub →</a>
+                </div>
+
+                <!-- Project 3: NetMonit -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>NetMonit</h3>
+                        <span class="project-tag">Network Monitor</span>
+                    </div>
+                    <p class="project-desc">Real-time network monitoring tool with advanced analytics and visualization.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>Flask</span>
+                        <span>Chart.js</span>
+                    </div>
+                    <a href="https://github.com/HVVSATHWIK" target="_blank" rel="noopener" class="project-link">View on GitHub →</a>
+                </div>
+
+                <!-- Project 4: AgriResolve AI -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>AgriResolve AI</h3>
+                        <span class="project-tag">AI Agriculture</span>
+                    </div>
+                    <p class="project-desc">AI-powered crop disease detection and agricultural advisory system.</p>
+                    <div class="project-tech">
+                        <span>TensorFlow</span>
+                        <span>Python</span>
+                        <span>Computer Vision</span>
+                    </div>
+                    <a href="https://github.com/HVVSATHWIK" target="_blank" rel="noopener" class="project-link">View on GitHub →</a>
+                </div>
+
+                <!-- Project 5: Litas -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Litas</h3>
+                        <span class="project-tag">Literary Platform</span>
+                    </div>
+                    <p class="project-desc">A modern platform for writers and readers to share and discover stories.</p>
+                    <div class="project-tech">
+                        <span>Vue.js</span>
+                        <span>Express</span>
+                        <span>PostgreSQL</span>
+                    </div>
+                    <a href="https://github.com/HVVSATHWIK" target="_blank" rel="noopener" class="project-link">View on GitHub →</a>
+                </div>
+
+                <!-- Project 6: AstraAI -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>AstraAI</h3>
+                        <span class="project-tag">AI Assistant</span>
+                    </div>
+                    <p class="project-desc">An intelligent AI assistant with natural language processing capabilities.</p>
+                    <div class="project-tech">
+                        <span>OpenAI</span>
+                        <span>Python</span>
+                        <span>NLP</span>
+                    </div>
+                    <a href="https://github.com/HVVSATHWIK" target="_blank" rel="noopener" class="project-link">View on GitHub →</a>
+                </div>
+
+                <!-- Project 7: WeatherGit -->
+                <div class="project-card featured">
+                    <div class="project-header">
+                        <h3>WeatherGit</h3>
+                        <span class="project-tag">3D Visualization</span>
+                    </div>
+                    <p class="project-desc">An interactive website that displays real-time weather information on a 3D Earth globe.</p>
+                    <div class="project-tech">
+                        <span>Three.js</span>
+                        <span>JavaScript</span>
+                        <span>Weather API</span>
+                    </div>
+                    <a href="https://github.com/HVVSATHWIK/WeatherWebsite" target="_blank" rel="noopener" class="project-link">View on GitHub →</a>
+                    <div class="project-image">
+                        <picture>
+                            <source srcset="Weather.webp" type="image/webp">
+                            <source srcset="Weather.png" type="image/png">
+                            <img src="Weather.png" alt="WeatherGit Screenshot" loading="lazy">
+                        </picture>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section glass-section">
+        <div class="section-content">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <p class="contact-intro">📫 Let's connect and collaborate!</p>
+                    <div class="contact-links">
+                        <a href="mailto:hvvsathwik27@gmail.com" class="contact-item">
+                            <span class="contact-icon">✉️</span>
+                            <span>hvvsathwik27@gmail.com</span>
+                        </a>
+                        <a href="tel:+919381560974" class="contact-item">
+                            <span class="contact-icon">📱</span>
+                            <span>+91-93815 60974</span>
+                        </a>
+                        <a href="https://github.com/HVVSATHWIK" target="_blank" rel="noopener" class="contact-item">
+                            <span class="contact-icon">💻</span>
+                            <span>GitHub: HVVSATHWIK</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/h-vv-sathwik-8488882b9/" target="_blank" rel="noopener" class="contact-item">
+                            <span class="contact-icon">🔗</span>
+                            <span>LinkedIn: H VV Sathwik</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 HVVSATHWIK. Crafted with Three.js & anime.js</p>
     </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="main.js" defer></script>
 </body>
 </html>
