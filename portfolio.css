@@ -78,6 +78,7 @@ body {
     font-weight: 500;
     transition: color 0.3s ease;
     position: relative;
+    text-decoration-skip-ink: auto;
 }
 
 .nav-links a:hover {
@@ -97,6 +98,11 @@ body {
 
 .nav-links a:hover::after {
     width: 100%;
+}
+
+.nav-links a:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
 }
 
 /* Hero Section */

@@ -84,10 +84,10 @@ function createShards() {
         );
         
         shard.userData = {
-            speedX: (Math.random() - 0.5) * 0.005,
-            speedY: (Math.random() - 0.5) * 0.005,
-            speedZ: (Math.random() - 0.5) * 0.005,
-            rotationSpeed: (Math.random() - 0.5) * 0.02
+            speedX: Math.max(0.001, Math.abs(Math.random() - 0.5) * 0.005) * (Math.random() > 0.5 ? 1 : -1),
+            speedY: Math.max(0.001, Math.abs(Math.random() - 0.5) * 0.005) * (Math.random() > 0.5 ? 1 : -1),
+            speedZ: Math.max(0.001, Math.abs(Math.random() - 0.5) * 0.005) * (Math.random() > 0.5 ? 1 : -1),
+            rotationSpeed: Math.max(0.005, Math.abs(Math.random() - 0.5) * 0.02) * (Math.random() > 0.5 ? 1 : -1)
         };
         
         shards.push(shard);
@@ -221,8 +221,7 @@ function initAnimations() {
                         opacity: [0, 1],
                         translateY: [30, 0],
                         duration: 600,
-                        easing: 'easeOutExpo',
-                        delay: anime.stagger(100)
+                        easing: 'easeOutExpo'
                     });
                 }
                 
@@ -232,19 +231,28 @@ function initAnimations() {
                         opacity: [0, 1],
                         scale: [0.9, 1],
                         duration: 600,
-                        easing: 'easeOutExpo',
-                        delay: anime.stagger(100)
+                        easing: 'easeOutExpo'
                     });
                 }
                 
-                if (element.classList.contains('about-text') || element.classList.contains('education-card')) {
+                if (element.classList.contains('about-text')) {
                     anime({
-                        targets: element.querySelectorAll('p, .education-card'),
+                        targets: element.querySelectorAll('p'),
                         opacity: [0, 1],
                         translateX: [-30, 0],
                         duration: 800,
                         easing: 'easeOutExpo',
                         delay: anime.stagger(200)
+                    });
+                }
+                
+                if (element.classList.contains('education-card')) {
+                    anime({
+                        targets: element,
+                        opacity: [0, 1],
+                        translateX: [-30, 0],
+                        duration: 800,
+                        easing: 'easeOutExpo'
                     });
                 }
                 
@@ -254,8 +262,7 @@ function initAnimations() {
                         opacity: [0, 1],
                         translateX: [-30, 0],
                         duration: 600,
-                        easing: 'easeOutExpo',
-                        delay: anime.stagger(100)
+                        easing: 'easeOutExpo'
                     });
                 }
                 
