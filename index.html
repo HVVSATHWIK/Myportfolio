@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="portfolio.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="is-loading">
     <div class="load-progress" aria-hidden="true">
@@ -31,15 +31,24 @@
             <div class="skeleton-card"></div>
         </div>
     </div>
-    <!-- Three.js Canvas Background -->
-    <canvas id="bg-canvas"></canvas>
+    <!-- Background (minimal) -->
+    <div class="bg-effects" aria-hidden="true">
+        <div class="bg-gradient"></div>
+        <div class="bg-noise"></div>
+    </div>
     
     <!-- Navigation -->
     <nav class="glass-nav">
         <div class="nav-logo">
             <img src="logo.svg" alt="HVVSATHWIK logo">
         </div>
-        <ul class="nav-links">
+        <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="sr-only">Toggle navigation</span>
+        </button>
+        <ul id="primary-nav" class="nav-links">
             <li><a href="#hero">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
@@ -69,13 +78,6 @@
         <div class="section-content">
             <h2 class="section-title">About Me</h2>
             <div class="about-grid">
-                <div class="about-image">
-                    <picture>
-                        <source srcset="profile.webp" type="image/webp">
-                        <source srcset="profile.png" type="image/png">
-                        <img src="profile.png" alt="Profile Picture" class="profile-pic" width="200" height="200" loading="lazy">
-                    </picture>
-                </div>
                 <div class="about-text">
                     <p>I am an undergraduate student specializing in Artificial Intelligence, driven by a profound curiosity to understand AI systems' inner workings and capabilities. With a passion for exploring the potential applications of AI technology, I am committed to delving into the complexities of this field.</p>
                     <p>Eager to collaborate with others and contribute to the advancement of artificial intelligence.</p>
@@ -319,12 +321,10 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2024 HVVSATHWIK. Crafted with Three.js & anime.js</p>
+        <p>&copy; 2026 HVVSATHWIK. Crafted with modern CSS</p>
     </footer>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="main.js" defer></script>
 </body>
 </html>
