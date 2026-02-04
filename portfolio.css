@@ -45,10 +45,6 @@ body.is-loading .contact-item {
     opacity: 0 !important;
 }
 
-body.is-loading .scroll-indicator {
-    display: none;
-}
-
 /* Three.js Background Canvas */
 #bg-canvas {
     position: fixed;
