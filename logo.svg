@@ -1,0 +1,17 @@
+<svg width="240" height="60" viewBox="0 0 240 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="2" y="2" width="56" height="56" rx="16" fill="url(#paint0_linear)" opacity="0.2"/>
+  <rect x="8" y="8" width="44" height="44" rx="12" stroke="#00D9FF" stroke-width="2"/>
+  <path d="M20 39L30 21L40 39" stroke="#00D9FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M24 33H36" stroke="#FF006E" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="74" y="38" font-family="Orbitron, sans-serif" font-size="22" font-weight="700" fill="url(#paint1_linear)">HVVSATHWIK</text>
+  <defs>
+    <linearGradient id="paint0_linear" x1="2" y1="2" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00D9FF"/>
+      <stop offset="1" stop-color="#FF006E"/>
+    </linearGradient>
+    <linearGradient id="paint1_linear" x1="74" y1="16" x2="210" y2="44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00D9FF"/>
+      <stop offset="1" stop-color="#FF006E"/>
+    </linearGradient>
+  </defs>
+</svg>

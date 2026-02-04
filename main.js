@@ -1,5 +1,5 @@
 // Three.js Scene Setup
-let scene, camera, renderer, particleSystem, torusKnot, shards = [];
+let scene, camera, renderer, particleSystem, torusKnot, haloRing, shards = [];
 let mouseX = 0, mouseY = 0;
 
 function initThreeJS() {
@@ -20,22 +20,42 @@ function initThreeJS() {
     renderer = new THREE.WebGLRenderer({
         canvas: canvas,
         alpha: true,
-        antialias: true
+        antialias: true,
+        powerPreference: 'high-performance'
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
     
-    // Animated Torus Knot
-    const torusGeometry = new THREE.TorusKnotGeometry(8, 2.5, 100, 16);
-    const torusMaterial = new THREE.MeshBasicMaterial({
+    // Animated Core Geometry
+    const coreGeometry = new THREE.IcosahedronGeometry(7, 1);
+    const coreMaterial = new THREE.MeshPhysicalMaterial({
         color: 0x00d9ff,
-        wireframe: true,
+        roughness: 0.2,
+        metalness: 0.6,
         transparent: true,
-        opacity: 0.15
+        opacity: 0.7,
+        emissive: new THREE.Color(0x0a5160),
+        emissiveIntensity: 0.4,
+        clearcoat: 0.4
     });
-    torusKnot = new THREE.Mesh(torusGeometry, torusMaterial);
-    torusKnot.position.set(-15, 5, -20);
+    torusKnot = new THREE.Mesh(coreGeometry, coreMaterial);
+    torusKnot.position.set(-12, 4, -18);
     scene.add(torusKnot);
+
+    const haloGeometry = new THREE.TorusGeometry(11, 0.4, 16, 120);
+    const haloMaterial = new THREE.MeshStandardMaterial({
+        color: 0xff006e,
+        transparent: true,
+        opacity: 0.35,
+        wireframe: true,
+        emissive: new THREE.Color(0x5c0030),
+        emissiveIntensity: 0.6
+    });
+    haloRing = new THREE.Mesh(haloGeometry, haloMaterial);
+    haloRing.position.copy(torusKnot.position);
+    haloRing.rotation.x = Math.PI / 2;
+    scene.add(haloRing);
     
     // Procedural Shards
     createShards();
@@ -60,7 +80,7 @@ function initThreeJS() {
 }
 
 function createShards() {
-    const shardCount = 15;
+    const shardCount = 12;
     for (let i = 0; i < shardCount; i++) {
         const geometry = new THREE.TetrahedronGeometry(Math.random() * 2 + 0.5);
         const material = new THREE.MeshPhongMaterial({
@@ -96,7 +116,7 @@ function createShards() {
 }
 
 function createParticles() {
-    const particleCount = 1000;
+    const particleCount = 700;
     const particles = new THREE.BufferGeometry();
     const positions = [];
     const colors = [];
@@ -117,7 +137,7 @@ function createParticles() {
     particles.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
     
     const particleMaterial = new THREE.PointsMaterial({
-        size: 0.15,
+        size: 0.18,
         vertexColors: true,
         transparent: true,
         opacity: 0.8,
@@ -131,10 +151,15 @@ function createParticles() {
 function animate() {
     requestAnimationFrame(animate);
     
-    // Rotate torus knot
+    // Rotate core geometry
     if (torusKnot) {
-        torusKnot.rotation.x += 0.003;
-        torusKnot.rotation.y += 0.005;
+        torusKnot.rotation.x += 0.004;
+        torusKnot.rotation.y += 0.006;
+    }
+
+    if (haloRing) {
+        haloRing.rotation.z += 0.003;
+        haloRing.rotation.y += 0.002;
     }
     
     // Animate shards
@@ -158,8 +183,8 @@ function animate() {
     }
     
     // Camera movement based on mouse
-    camera.position.x += (mouseX * 0.05 - camera.position.x) * 0.05;
-    camera.position.y += (-mouseY * 0.05 - camera.position.y) * 0.05;
+    camera.position.x += (mouseX * 0.06 - camera.position.x) * 0.06;
+    camera.position.y += (-mouseY * 0.06 - camera.position.y) * 0.06;
     camera.lookAt(scene.position);
     
     renderer.render(scene, camera);
@@ -184,15 +209,15 @@ function initAnimations() {
             targets: '.hero-content',
             opacity: [0, 1],
             translateY: [50, 0],
-            duration: 1200,
-            easing: 'easeOutExpo'
+            duration: 800,
+            easing: 'easeOutCubic'
         })
         .add({
             targets: '.scroll-indicator',
             opacity: [0, 1],
-            duration: 800,
+            duration: 500,
             easing: 'easeOutQuad'
-        }, '-=400');
+        }, '-=300');
     
     // Scroll-triggered animations
     const observerOptions = {
@@ -210,9 +235,9 @@ function initAnimations() {
                         targets: element,
                         opacity: [0, 1],
                         translateY: [30, 0],
-                        duration: 800,
-                        easing: 'easeOutExpo'
-                    });
+                    duration: 500,
+                    easing: 'easeOutCubic'
+                });
                 }
                 
                 if (element.classList.contains('skill-card')) {
@@ -220,9 +245,9 @@ function initAnimations() {
                         targets: element,
                         opacity: [0, 1],
                         translateY: [30, 0],
-                        duration: 600,
-                        easing: 'easeOutExpo'
-                    });
+                    duration: 450,
+                    easing: 'easeOutCubic'
+                });
                 }
                 
                 if (element.classList.contains('project-card')) {
@@ -230,9 +255,9 @@ function initAnimations() {
                         targets: element,
                         opacity: [0, 1],
                         scale: [0.9, 1],
-                        duration: 600,
-                        easing: 'easeOutExpo'
-                    });
+                    duration: 450,
+                    easing: 'easeOutCubic'
+                });
                 }
                 
                 if (element.classList.contains('about-text')) {
@@ -240,10 +265,10 @@ function initAnimations() {
                         targets: element.querySelectorAll('p'),
                         opacity: [0, 1],
                         translateX: [-30, 0],
-                        duration: 800,
-                        easing: 'easeOutExpo',
-                        delay: anime.stagger(200)
-                    });
+                    duration: 500,
+                    easing: 'easeOutCubic',
+                    delay: anime.stagger(120)
+                });
                 }
                 
                 if (element.classList.contains('education-card')) {
@@ -251,9 +276,9 @@ function initAnimations() {
                         targets: element,
                         opacity: [0, 1],
                         translateX: [-30, 0],
-                        duration: 800,
-                        easing: 'easeOutExpo'
-                    });
+                    duration: 500,
+                    easing: 'easeOutCubic'
+                });
                 }
                 
                 if (element.classList.contains('contact-item')) {
@@ -261,9 +286,9 @@ function initAnimations() {
                         targets: element,
                         opacity: [0, 1],
                         translateX: [-30, 0],
-                        duration: 600,
-                        easing: 'easeOutExpo'
-                    });
+                    duration: 450,
+                    easing: 'easeOutCubic'
+                });
                 }
                 
                 observer.unobserve(element);
@@ -285,18 +310,18 @@ function initAnimations() {
             anime({
                 targets: card,
                 scale: 1.02,
-                duration: 300,
-                easing: 'easeOutQuad'
-            });
+            duration: 220,
+            easing: 'easeOutQuad'
+        });
         });
         
         card.addEventListener('mouseleave', () => {
             anime({
                 targets: card,
                 scale: 1,
-                duration: 300,
-                easing: 'easeOutQuad'
-            });
+            duration: 220,
+            easing: 'easeOutQuad'
+        });
         });
     });
 }
@@ -312,7 +337,7 @@ function initSmoothScroll() {
                 anime({
                     targets: [document.documentElement, document.body],
                     scrollTop: targetPosition,
-                    duration: 1000,
+                    duration: 650,
                     easing: 'easeInOutQuad'
                 });
             }
@@ -322,31 +347,42 @@ function initSmoothScroll() {
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    initThreeJS();
-    initAnimations();
-    initSmoothScroll();
-    
-    // Add active nav link on scroll
+    if (typeof THREE !== 'undefined') {
+        initThreeJS();
+    }
+
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
-    
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (scrollY >= sectionTop - 200) {
-                current = section.getAttribute('id');
-            }
+
+    const startExperience = () => {
+        document.body.classList.remove('is-loading');
+        document.body.classList.add('loaded');
+        if (typeof anime !== 'undefined') {
+            initAnimations();
+            initSmoothScroll();
+        }
+
+        // Add active nav link on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.color = 'var(--primary)';
+                }
+            });
         });
-        
-        navLinks.forEach(link => {
-            link.style.color = '';
-            if (link.getAttribute('href') === `#${current}`) {
-                link.style.color = 'var(--primary)';
-            }
-        });
-    });
+    };
+
+    setTimeout(startExperience, 350);
 });
 
   
