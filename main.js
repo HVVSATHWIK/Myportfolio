@@ -28,7 +28,7 @@ function initThreeJS() {
     renderer.setClearColor(0x000000, 0);
     
     // Animated Core Geometry
-    const coreGeometry = new THREE.IcosahedronGeometry(7, 1);
+    const coreGeometry = new THREE.IcosahedronGeometry(6.2, 2);
     const coreMaterial = new THREE.MeshPhysicalMaterial({
         color: 0x00d9ff,
         roughness: 0.2,
@@ -36,18 +36,19 @@ function initThreeJS() {
         transparent: true,
         opacity: 0.7,
         emissive: new THREE.Color(0x0a5160),
-        emissiveIntensity: 0.4,
-        clearcoat: 0.4
+        emissiveIntensity: 0.5,
+        clearcoat: 0.6,
+        clearcoatRoughness: 0.2
     });
     torusKnot = new THREE.Mesh(coreGeometry, coreMaterial);
-    torusKnot.position.set(-12, 4, -18);
+    torusKnot.position.set(-10, 6, -18);
     scene.add(torusKnot);
 
-    const haloGeometry = new THREE.TorusGeometry(11, 0.4, 16, 120);
+    const haloGeometry = new THREE.TorusGeometry(10.5, 0.35, 18, 140);
     const haloMaterial = new THREE.MeshStandardMaterial({
         color: 0xff006e,
         transparent: true,
-        opacity: 0.35,
+        opacity: 0.45,
         wireframe: true,
         emissive: new THREE.Color(0x5c0030),
         emissiveIntensity: 0.6
@@ -80,14 +81,14 @@ function initThreeJS() {
 }
 
 function createShards() {
-    const shardCount = 12;
+    const shardCount = 14;
     for (let i = 0; i < shardCount; i++) {
         const geometry = new THREE.TetrahedronGeometry(Math.random() * 2 + 0.5);
         const material = new THREE.MeshPhongMaterial({
             color: Math.random() > 0.5 ? 0x7b2cbf : 0xff006e,
             transparent: true,
-            opacity: 0.6,
-            wireframe: Math.random() > 0.5
+            opacity: 0.55,
+            wireframe: Math.random() > 0.65
         });
         const shard = new THREE.Mesh(geometry, material);
         
@@ -116,7 +117,7 @@ function createShards() {
 }
 
 function createParticles() {
-    const particleCount = 700;
+    const particleCount = 820;
     const particles = new THREE.BufferGeometry();
     const positions = [];
     const colors = [];
@@ -137,7 +138,7 @@ function createParticles() {
     particles.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
     
     const particleMaterial = new THREE.PointsMaterial({
-        size: 0.18,
+        size: 0.2,
         vertexColors: true,
         transparent: true,
         opacity: 0.8,
@@ -153,13 +154,13 @@ function animate() {
     
     // Rotate core geometry
     if (torusKnot) {
-        torusKnot.rotation.x += 0.004;
-        torusKnot.rotation.y += 0.006;
+        torusKnot.rotation.x += 0.0035;
+        torusKnot.rotation.y += 0.0055;
     }
 
     if (haloRing) {
-        haloRing.rotation.z += 0.003;
-        haloRing.rotation.y += 0.002;
+        haloRing.rotation.z += 0.0035;
+        haloRing.rotation.y += 0.0025;
     }
     
     // Animate shards
