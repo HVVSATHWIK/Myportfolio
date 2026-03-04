@@ -18,61 +18,76 @@ function initThreeBackground() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // Floating particles
-    const particleCount = 120;
-    const particleBoundary = 10;
-    const particlesGeometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const velocities = new Float32Array(particleCount * 3);
+    // Neural network nodes
+    const nodeCount = 80;
+    const nodeBoundary = 12;
+    const nodesGeometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(nodeCount * 3);
+    const velocities = new Float32Array(nodeCount * 3);
 
-    for (let i = 0; i < particleCount * 3; i += 3) {
-        positions[i] = (Math.random() - 0.5) * 20;
-        positions[i + 1] = (Math.random() - 0.5) * 20;
-        positions[i + 2] = (Math.random() - 0.5) * 20;
-        velocities[i] = (Math.random() - 0.5) * 0.005;
-        velocities[i + 1] = (Math.random() - 0.5) * 0.005;
-        velocities[i + 2] = (Math.random() - 0.5) * 0.005;
+    for (let i = 0; i < nodeCount * 3; i += 3) {
+        positions[i] = (Math.random() - 0.5) * 24;
+        positions[i + 1] = (Math.random() - 0.5) * 24;
+        positions[i + 2] = (Math.random() - 0.5) * 16;
+        velocities[i] = (Math.random() - 0.5) * 0.004;
+        velocities[i + 1] = (Math.random() - 0.5) * 0.004;
+        velocities[i + 2] = (Math.random() - 0.5) * 0.002;
     }
 
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    const particlesMaterial = new THREE.PointsMaterial({
+    nodesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const nodesMaterial = new THREE.PointsMaterial({
         color: 0x00e0d0,
-        size: 0.04,
+        size: 0.06,
         transparent: true,
-        opacity: 0.6,
+        opacity: 0.7,
         blending: THREE.AdditiveBlending
     });
-    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particles);
+    const nodes = new THREE.Points(nodesGeometry, nodesMaterial);
+    scene.add(nodes);
 
-    // Wireframe geometric shapes
+    // Lines connecting nearby nodes (neural network edges)
+    const maxConnections = nodeCount * 6;
+    const linePositions = new Float32Array(maxConnections * 6);
+    const lineGeometry = new THREE.BufferGeometry();
+    lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+    const lineMaterial = new THREE.LineBasicMaterial({
+        color: 0x00e0d0,
+        transparent: true,
+        opacity: 0.08,
+        blending: THREE.AdditiveBlending
+    });
+    const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
+    scene.add(lines);
+
+    // Floating geometric shapes (subtle, professional)
     const shapes = [];
     const shapeMaterial = new THREE.MeshBasicMaterial({
         color: 0x2a3439,
         wireframe: true,
         transparent: true,
-        opacity: 0.15
+        opacity: 0.1
     });
 
-    const icosahedron = new THREE.Mesh(new THREE.IcosahedronGeometry(1.5, 1), shapeMaterial);
-    icosahedron.position.set(-4, 2, -6);
+    const icosahedron = new THREE.Mesh(new THREE.IcosahedronGeometry(2, 1), shapeMaterial);
+    icosahedron.position.set(-5, 3, -8);
     scene.add(icosahedron);
     shapes.push(icosahedron);
 
-    const octahedron = new THREE.Mesh(new THREE.OctahedronGeometry(1.2, 0), shapeMaterial.clone());
-    octahedron.material.color.setHex(0x00e0d0);
-    octahedron.material.opacity = 0.08;
-    octahedron.position.set(4, -1, -5);
-    scene.add(octahedron);
-    shapes.push(octahedron);
+    const dodecahedron = new THREE.Mesh(new THREE.DodecahedronGeometry(1.5, 0), shapeMaterial.clone());
+    dodecahedron.material.color.setHex(0x00e0d0);
+    dodecahedron.material.opacity = 0.05;
+    dodecahedron.position.set(5, -2, -7);
+    scene.add(dodecahedron);
+    shapes.push(dodecahedron);
 
-    const torus = new THREE.Mesh(new THREE.TorusGeometry(1, 0.3, 8, 24), shapeMaterial.clone());
-    torus.material.opacity = 0.1;
-    torus.position.set(0, -3, -8);
-    scene.add(torus);
-    shapes.push(torus);
+    const torusKnot = new THREE.Mesh(new THREE.TorusKnotGeometry(1.2, 0.3, 64, 8), shapeMaterial.clone());
+    torusKnot.material.opacity = 0.06;
+    torusKnot.material.color.setHex(0x5a6a7a);
+    torusKnot.position.set(0, -4, -10);
+    scene.add(torusKnot);
+    shapes.push(torusKnot);
 
-    camera.position.z = 5;
+    camera.position.z = 8;
 
     let mouseX = 0;
     let mouseY = 0;
@@ -87,33 +102,61 @@ function initThreeBackground() {
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
+    const connectionDistance = 4.5;
+
     function animate() {
         requestAnimationFrame(animate);
 
-        // Animate particles
-        const posArray = particles.geometry.attributes.position.array;
-        for (let i = 0; i < particleCount * 3; i += 3) {
+        // Animate nodes
+        const posArray = nodes.geometry.attributes.position.array;
+        for (let i = 0; i < nodeCount * 3; i += 3) {
             posArray[i] += velocities[i];
             posArray[i + 1] += velocities[i + 1];
             posArray[i + 2] += velocities[i + 2];
 
-            // Wrap around
-            if (Math.abs(posArray[i]) > particleBoundary) velocities[i] *= -1;
-            if (Math.abs(posArray[i + 1]) > particleBoundary) velocities[i + 1] *= -1;
-            if (Math.abs(posArray[i + 2]) > particleBoundary) velocities[i + 2] *= -1;
+            if (Math.abs(posArray[i]) > nodeBoundary) velocities[i] *= -1;
+            if (Math.abs(posArray[i + 1]) > nodeBoundary) velocities[i + 1] *= -1;
+            if (Math.abs(posArray[i + 2]) > nodeBoundary) velocities[i + 2] *= -1;
         }
-        particles.geometry.attributes.position.needsUpdate = true;
-        particles.rotation.y += 0.0003;
+        nodes.geometry.attributes.position.needsUpdate = true;
+        nodes.rotation.y += 0.0002;
+
+        // Update connection lines between nearby nodes
+        let lineIndex = 0;
+        const lp = lines.geometry.attributes.position.array;
+        for (let i = 0; i < nodeCount; i++) {
+            for (let j = i + 1; j < nodeCount; j++) {
+                if (lineIndex >= maxConnections * 6) break;
+                const dx = posArray[i * 3] - posArray[j * 3];
+                const dy = posArray[i * 3 + 1] - posArray[j * 3 + 1];
+                const dz = posArray[i * 3 + 2] - posArray[j * 3 + 2];
+                const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+                if (dist < connectionDistance) {
+                    lp[lineIndex++] = posArray[i * 3];
+                    lp[lineIndex++] = posArray[i * 3 + 1];
+                    lp[lineIndex++] = posArray[i * 3 + 2];
+                    lp[lineIndex++] = posArray[j * 3];
+                    lp[lineIndex++] = posArray[j * 3 + 1];
+                    lp[lineIndex++] = posArray[j * 3 + 2];
+                }
+            }
+        }
+        // Zero out unused line positions
+        for (let i = lineIndex; i < maxConnections * 6; i++) {
+            lp[i] = 0;
+        }
+        lines.geometry.attributes.position.needsUpdate = true;
+        lines.geometry.setDrawRange(0, lineIndex / 3);
 
         // Animate shapes
         shapes.forEach((shape, i) => {
-            shape.rotation.x += 0.002 * (i + 1) * 0.5;
-            shape.rotation.y += 0.001 * (i + 1) * 0.5;
+            shape.rotation.x += 0.001 * (i + 1) * 0.5;
+            shape.rotation.y += 0.0008 * (i + 1) * 0.5;
         });
 
         // Mouse follow camera
-        camera.position.x += (mouseX - camera.position.x) * 0.02;
-        camera.position.y += (-mouseY - camera.position.y) * 0.02;
+        camera.position.x += (mouseX * 2 - camera.position.x) * 0.015;
+        camera.position.y += (-mouseY * 2 - camera.position.y) * 0.015;
         camera.lookAt(scene.position);
 
         renderer.render(scene, camera);
