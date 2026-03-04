@@ -20,6 +20,7 @@ function initThreeBackground() {
 
     // Floating particles
     const particleCount = 120;
+    const particleBoundary = 10;
     const particlesGeometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     const velocities = new Float32Array(particleCount * 3);
@@ -97,9 +98,9 @@ function initThreeBackground() {
             posArray[i + 2] += velocities[i + 2];
 
             // Wrap around
-            if (Math.abs(posArray[i]) > 10) velocities[i] *= -1;
-            if (Math.abs(posArray[i + 1]) > 10) velocities[i + 1] *= -1;
-            if (Math.abs(posArray[i + 2]) > 10) velocities[i + 2] *= -1;
+            if (Math.abs(posArray[i]) > particleBoundary) velocities[i] *= -1;
+            if (Math.abs(posArray[i + 1]) > particleBoundary) velocities[i + 1] *= -1;
+            if (Math.abs(posArray[i + 2]) > particleBoundary) velocities[i + 2] *= -1;
         }
         particles.geometry.attributes.position.needsUpdate = true;
         particles.rotation.y += 0.0003;
