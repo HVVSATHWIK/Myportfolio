@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HVVSATHWIK - Undergraduate Student Specializing in Artificial Intelligence">
-    <meta name="keywords" content="Artificial Intelligence, Portfolio, Projects, HVVSATHWIK">
-    <title>HVVSATHWIK's Portfolio</title>
+    <meta name="description" content="Veer (H VV Sathwik) - AI Systems Engineer building AI systems for accessibility, healthcare, and enterprise intelligence.">
+    <meta name="keywords" content="AI Systems Engineer, Artificial Intelligence, Portfolio, Veer, H VV Sathwik">
+    <title>Veer — AI Systems Engineer</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="portfolio.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +14,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 </head>
 
 <body class="is-loading">
@@ -35,6 +36,9 @@
             <div class="skeleton-card"></div>
         </div>
     </div>
+    <!-- 3D Background Canvas -->
+    <canvas id="three-canvas" aria-hidden="true"></canvas>
+
     <!-- Background (minimal) -->
     <div class="bg-effects" aria-hidden="true">
         <div class="bg-gradient"></div>
@@ -64,8 +68,11 @@
     <!-- Hero Section -->
     <section id="hero" class="hero-section">
         <div class="hero-content">
-            <h1 class="hero-title glitch" data-text="HVVSATHWIK">HVVSATHWIK</h1>
-            <p class="hero-subtitle">Undergraduate Student Specializing in Artificial Intelligence</p>
+            <p class="hero-greeting">Hello, I'm</p>
+            <h1 class="hero-title glitch" data-text="Veer">Veer</h1>
+            <p class="hero-name">(H VV Sathwik)</p>
+            <p class="hero-role">AI Systems Engineer</p>
+            <p class="hero-subtitle">Building AI systems for accessibility, healthcare, and enterprise intelligence.</p>
             <div class="hero-cta">
                 <a href="#projects" class="cta-button">View Projects</a>
                 <a href="#contact" class="cta-button-outline">Get in Touch</a>
@@ -83,16 +90,12 @@
             <h2 class="section-title">About Me</h2>
             <div class="about-grid">
                 <div class="about-text">
-                    <p>I am an undergraduate student specializing in Artificial Intelligence, driven by a profound
-                        curiosity to understand AI systems' inner workings and capabilities. With a passion for
-                        exploring the potential applications of AI technology, I am committed to delving into the
-                        complexities of this field.</p>
-                    <p>Eager to collaborate with others and contribute to the advancement of artificial intelligence.
-                    </p>
+                    <p>Third year Artificial Intelligence student at Amrita Vishwa Vidyapeetham focused on building interpretable AI systems and real world AI platforms.</p>
+                    <p>Passionate about creating AI solutions that bridge the gap between research and production — from healthcare diagnostics to agricultural intelligence and beyond.</p>
                     <div class="education-card">
                         <h3>Education</h3>
-                        <p><strong>B.Tech in Computer Science</strong></p>
-                        <p>Amrita Vishwa Vidhyapeetham, Amaravati, India</p>
+                        <p><strong>B.Tech in Computer Science (AI)</strong></p>
+                        <p>Amrita Vishwa Vidyapeetham, Amaravati, India</p>
                         <p class="edu-year">2023 - Present</p>
                     </div>
                 </div>
@@ -104,30 +107,82 @@
     <section id="skills" class="section glass-section">
         <div class="section-content">
             <h2 class="section-title">Skills & Technologies</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon"><span>JV</span></div>
-                    <h3>Java</h3>
+
+            <div class="skills-category">
+                <h3 class="skills-category-title">Artificial Intelligence</h3>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon"><span>AI</span></div>
+                        <h3>Artificial Intelligence</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><span>MM</span></div>
+                        <h3>Multimodal AI</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><span>Gen</span></div>
+                        <h3>Generative AI</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><span>CV</span></div>
+                        <h3>Computer Vision</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><span>NS</span></div>
+                        <h3>Neuro-symbolic AI</h3>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><span>PY</span></div>
-                    <h3>Python</h3>
+            </div>
+
+            <div class="skills-category">
+                <h3 class="skills-category-title">Software Engineering</h3>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon"><span>PY</span></div>
+                        <h3>Python</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><span>JS</span></div>
+                        <h3>JavaScript</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><span>Re</span></div>
+                        <h3>React</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><span>No</span></div>
+                        <h3>Node.js</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><span>Nx</span></div>
+                        <h3>Next.js</h3>
+                    </div>
                 </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><span>C</span></div>
-                    <h3>C</h3>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><span>HTML</span></div>
-                    <h3>HTML & CSS</h3>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><span>JS</span></div>
-                    <h3>JavaScript</h3>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><span>3D</span></div>
-                    <h3>Three.js</h3>
+            </div>
+
+            <div class="skills-category">
+                <h3 class="skills-category-title">Infrastructure</h3>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon"><span>Fb</span></div>
+                        <h3>Firebase</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><span>GC</span></div>
+                        <h3>Google Cloud</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><span>Dk</span></div>
+                        <h3>Docker</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><span>Mg</span></div>
+                        <h3>MongoDB</h3>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon"><span>SQ</span></div>
+                        <h3>MySQL</h3>
+                    </div>
                 </div>
             </div>
         </div>
@@ -145,7 +200,7 @@
                         <span class="project-tag">Healthcare Platform</span>
                     </div>
                     <p class="project-desc">A comprehensive healthcare platform connecting patients with medical
-                        professionals globally.</p>
+                        professionals globally for accessible care.</p>
                     <div class="project-tech">
                         <span>React</span>
                         <span>Node.js</span>
@@ -159,43 +214,38 @@
                     </div>
                 </div>
 
-                <!-- Project 2: Dots -->
+                <!-- Project 2: SignSense -->
                 <div class="project-card">
                     <div class="project-header">
-                        <h3>Dots</h3>
-                        <span class="project-tag">Interactive Game</span>
+                        <h3>SignSense</h3>
+                        <span class="project-tag">Accessibility AI</span>
                     </div>
-                    <p class="project-desc">An engaging dot-connecting puzzle game with procedural level generation.</p>
+                    <p class="project-desc">AI-powered sign language recognition system for real-time communication accessibility.</p>
                     <div class="project-tech">
-                        <span>JavaScript</span>
-                        <span>Canvas API</span>
-                        <span>AI Logic</span>
+                        <span>Computer Vision</span>
+                        <span>Python</span>
+                        <span>TensorFlow</span>
                     </div>
                     <div class="project-actions">
-                        <a href="https://dots-three.vercel.app/" target="_blank" rel="noopener"
-                            class="project-link">Live Site →</a>
-                        <a href="https://github.com/HVVSATHWIK/Dots" target="_blank" rel="noopener"
+                        <a href="https://github.com/HVVSATHWIK/SignSense" target="_blank" rel="noopener"
                             class="project-link secondary">GitHub</a>
                     </div>
                 </div>
 
-                <!-- Project 3: NetMonit -->
+                <!-- Project 3: InvenAI -->
                 <div class="project-card">
                     <div class="project-header">
-                        <h3>NetMonit</h3>
-                        <span class="project-tag">Network Monitor</span>
+                        <h3>InvenAI</h3>
+                        <span class="project-tag">Enterprise Intelligence</span>
                     </div>
-                    <p class="project-desc">Real-time network monitoring tool with advanced analytics and visualization.
-                    </p>
+                    <p class="project-desc">Intelligent inventory management system powered by AI for enterprise-grade analytics and forecasting.</p>
                     <div class="project-tech">
                         <span>Python</span>
-                        <span>Flask</span>
-                        <span>Chart.js</span>
+                        <span>React</span>
+                        <span>Firebase</span>
                     </div>
                     <div class="project-actions">
-                        <a href="https://netmonit-aa2cd.web.app/" target="_blank" rel="noopener"
-                            class="project-link">Live Site →</a>
-                        <a href="https://github.com/HVVSATHWIK/Network-Health-Monitor" target="_blank" rel="noopener"
+                        <a href="https://github.com/HVVSATHWIK/InvenAI" target="_blank" rel="noopener"
                             class="project-link secondary">GitHub</a>
                     </div>
                 </div>
@@ -206,7 +256,7 @@
                         <h3>AgriResolve AI</h3>
                         <span class="project-tag">AI Agriculture</span>
                     </div>
-                    <p class="project-desc">AI-powered crop disease detection and agricultural advisory system.</p>
+                    <p class="project-desc">AI-powered crop disease detection and agricultural advisory system for smart farming.</p>
                     <div class="project-tech">
                         <span>TensorFlow</span>
                         <span>Python</span>
@@ -220,73 +270,42 @@
                     </div>
                 </div>
 
-                <!-- Project 5: LitasDark -->
+                <!-- Project 5: NetMonit -->
                 <div class="project-card">
                     <div class="project-header">
-                        <h3>LitasDark / DarkPDFConverter</h3>
+                        <h3>NetMonit</h3>
+                        <span class="project-tag">Network Monitor</span>
+                    </div>
+                    <p class="project-desc">Real-time network monitoring tool with advanced analytics and visualization dashboards.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>Flask</span>
+                        <span>Chart.js</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://netmonit-aa2cd.web.app/" target="_blank" rel="noopener"
+                            class="project-link">Live Site →</a>
+                        <a href="https://github.com/HVVSATHWIK/Network-Health-Monitor" target="_blank" rel="noopener"
+                            class="project-link secondary">GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Project 6: Litas Dark -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>Litas Dark</h3>
                         <span class="project-tag">PDF Converter</span>
                     </div>
-                    <p class="project-desc">Dark-mode PDF conversion experience for fast, readable document workflows.
-                    </p>
+                    <p class="project-desc">Dark-mode PDF conversion experience for fast, readable document workflows.</p>
                     <div class="project-tech">
                         <span>React</span>
                         <span>PDF.js</span>
                         <span>Vercel</span>
                     </div>
                     <div class="project-actions">
-                        <a href="https://litasdark.vercel.app/" target="_blank" rel="noopener" class="project-link">Live
-                            Site →</a>
+                        <a href="https://litasdark.vercel.app/" target="_blank" rel="noopener" class="project-link">Live Site →</a>
                         <a href="https://github.com/HVVSATHWIK/DarkPDFConverter" target="_blank" rel="noopener"
                             class="project-link secondary">GitHub</a>
-                    </div>
-                </div>
-
-                <!-- Project 6: AstraAI -->
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>AstraAI</h3>
-                        <span class="project-tag">AI Assistant</span>
-                    </div>
-                    <p class="project-desc">An intelligent AI assistant with natural language processing capabilities.
-                    </p>
-                    <div class="project-tech">
-                        <span>OpenAI</span>
-                        <span>Python</span>
-                        <span>NLP</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://astra-verse-nu.vercel.app/" target="_blank" rel="noopener"
-                            class="project-link">Live Site →</a>
-                        <a href="https://github.com/HVVSATHWIK/AstraVerse" target="_blank" rel="noopener"
-                            class="project-link secondary">GitHub</a>
-                    </div>
-                </div>
-
-                <!-- Project 7: WeatherGit -->
-                <div class="project-card featured">
-                    <div class="project-header">
-                        <h3>WeatherGit</h3>
-                        <span class="project-tag">3D Visualization</span>
-                    </div>
-                    <p class="project-desc">An interactive website that displays real-time weather information on a 3D
-                        Earth globe.</p>
-                    <div class="project-tech">
-                        <span>Three.js</span>
-                        <span>JavaScript</span>
-                        <span>Weather API</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://rawcdn.githack.com/HVVSATHWIK/WeatherProject/31eaaeed1bc7ab4c7a3c1bd50c3c50105384ac10/weatherh.html"
-                            target="_blank" rel="noopener" class="project-link">Live Site →</a>
-                        <a href="https://github.com/HVVSATHWIK/WeatherWebsite" target="_blank" rel="noopener"
-                            class="project-link secondary">GitHub</a>
-                    </div>
-                    <div class="project-image">
-                        <picture>
-                            <source srcset="Weather.webp" type="image/webp">
-                            <source srcset="Weather.png" type="image/png">
-                            <img src="Weather.png" alt="WeatherGit Screenshot" loading="lazy">
-                        </picture>
                     </div>
                 </div>
             </div>
@@ -351,7 +370,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2026 HVVSATHWIK. Crafted with modern CSS</p>
+        <p>&copy; 2026 Veer (H VV Sathwik). Crafted with modern CSS & Three.js</p>
     </footer>
 
     <!-- Scripts -->

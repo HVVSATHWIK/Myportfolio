@@ -5,6 +5,122 @@ const state = {
     rafId: 0
 };
 
+function initThreeBackground() {
+    if (prefersReducedMotion) return;
+    if (typeof THREE === 'undefined') return;
+
+    const canvas = document.getElementById('three-canvas');
+    if (!canvas) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Floating particles
+    const particleCount = 120;
+    const particlesGeometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const velocities = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount * 3; i += 3) {
+        positions[i] = (Math.random() - 0.5) * 20;
+        positions[i + 1] = (Math.random() - 0.5) * 20;
+        positions[i + 2] = (Math.random() - 0.5) * 20;
+        velocities[i] = (Math.random() - 0.5) * 0.005;
+        velocities[i + 1] = (Math.random() - 0.5) * 0.005;
+        velocities[i + 2] = (Math.random() - 0.5) * 0.005;
+    }
+
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const particlesMaterial = new THREE.PointsMaterial({
+        color: 0x00e0d0,
+        size: 0.04,
+        transparent: true,
+        opacity: 0.6,
+        blending: THREE.AdditiveBlending
+    });
+    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particles);
+
+    // Wireframe geometric shapes
+    const shapes = [];
+    const shapeMaterial = new THREE.MeshBasicMaterial({
+        color: 0x2a3439,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.15
+    });
+
+    const icosahedron = new THREE.Mesh(new THREE.IcosahedronGeometry(1.5, 1), shapeMaterial);
+    icosahedron.position.set(-4, 2, -6);
+    scene.add(icosahedron);
+    shapes.push(icosahedron);
+
+    const octahedron = new THREE.Mesh(new THREE.OctahedronGeometry(1.2, 0), shapeMaterial.clone());
+    octahedron.material.color.setHex(0x00e0d0);
+    octahedron.material.opacity = 0.08;
+    octahedron.position.set(4, -1, -5);
+    scene.add(octahedron);
+    shapes.push(octahedron);
+
+    const torus = new THREE.Mesh(new THREE.TorusGeometry(1, 0.3, 8, 24), shapeMaterial.clone());
+    torus.material.opacity = 0.1;
+    torus.position.set(0, -3, -8);
+    scene.add(torus);
+    shapes.push(torus);
+
+    camera.position.z = 5;
+
+    let mouseX = 0;
+    let mouseY = 0;
+    window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 0.5;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 0.5;
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        // Animate particles
+        const posArray = particles.geometry.attributes.position.array;
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            posArray[i] += velocities[i];
+            posArray[i + 1] += velocities[i + 1];
+            posArray[i + 2] += velocities[i + 2];
+
+            // Wrap around
+            if (Math.abs(posArray[i]) > 10) velocities[i] *= -1;
+            if (Math.abs(posArray[i + 1]) > 10) velocities[i + 1] *= -1;
+            if (Math.abs(posArray[i + 2]) > 10) velocities[i + 2] *= -1;
+        }
+        particles.geometry.attributes.position.needsUpdate = true;
+        particles.rotation.y += 0.0003;
+
+        // Animate shapes
+        shapes.forEach((shape, i) => {
+            shape.rotation.x += 0.002 * (i + 1) * 0.5;
+            shape.rotation.y += 0.001 * (i + 1) * 0.5;
+        });
+
+        // Mouse follow camera
+        camera.position.x += (mouseX - camera.position.x) * 0.02;
+        camera.position.y += (-mouseY - camera.position.y) * 0.02;
+        camera.lookAt(scene.position);
+
+        renderer.render(scene, camera);
+    }
+
+    animate();
+}
+
 function initPointerGlow() {
     if (prefersReducedMotion) return;
 
@@ -170,6 +286,7 @@ function initReveals() {
 
     const groups = [
         { selector: '.section-title', baseDelay: 0, step: 0 },
+        { selector: '.skills-category-title', baseDelay: 50, step: 50 },
         { selector: '.skill-card', baseDelay: 100, step: 50 },
         { selector: '.project-card', baseDelay: 100, step: 100 },
         { selector: '.about-text p', baseDelay: 0, step: 100 },
@@ -208,6 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPointerGlow();
     initNavToggle();
     initTiltEffect();
+    initThreeBackground();
 
     const startExperience = () => {
         initReveals();
