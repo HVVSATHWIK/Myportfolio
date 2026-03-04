@@ -510,7 +510,8 @@ body.loaded {
     line-height: 1.1;
     letter-spacing: -0.02em;
     position: relative;
-    background: linear-gradient(to right, #e8ecf0, #8a9bae);
+    background: linear-gradient(to right, #e8ecf0, #00e0d0, #e8ecf0, #8a9bae);
+    background-size: 200% auto;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1069,84 +1070,19 @@ body.loaded {
     }
 }
 
-/* Glitch Effect */
-.glitch {
+/* Professional Hero Title Shimmer */
+.hero-title {
     position: relative;
+    background-size: 200% auto;
+    animation: title-shimmer 4s ease-in-out infinite;
 }
 
-.glitch::before,
-.glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.glitch::before {
-    left: 2px;
-    text-shadow: -1px 0 #00e0d0;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim-1 5s infinite linear alternate-reverse;
-}
-
-.glitch::after {
-    left: -2px;
-    text-shadow: -1px 0 #5a6a7a;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim-2 5s infinite linear alternate-reverse;
-}
-
-@keyframes glitch-anim-1 {
-    0% {
-        clip: rect(38px, 9999px, 81px, 0);
+@keyframes title-shimmer {
+    0%, 100% {
+        background-position: 0% center;
     }
-
-    20% {
-        clip: rect(61px, 9999px, 59px, 0);
-    }
-
-    40% {
-        clip: rect(8px, 9999px, 2px, 0);
-    }
-
-    60% {
-        clip: rect(31px, 9999px, 98px, 0);
-    }
-
-    80% {
-        clip: rect(2px, 9999px, 11px, 0);
-    }
-
-    100% {
-        clip: rect(59px, 9999px, 73px, 0);
-    }
-}
-
-@keyframes glitch-anim-2 {
-    0% {
-        clip: rect(93px, 9999px, 14px, 0);
-    }
-
-    20% {
-        clip: rect(87px, 9999px, 95px, 0);
-    }
-
-    40% {
-        clip: rect(22px, 9999px, 45px, 0);
-    }
-
-    60% {
-        clip: rect(43px, 9999px, 3px, 0);
-    }
-
-    80% {
-        clip: rect(10px, 9999px, 32px, 0);
-    }
-
-    100% {
-        clip: rect(81px, 9999px, 54px, 0);
+    50% {
+        background-position: 100% center;
     }
 }
 
